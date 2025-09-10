@@ -1,0 +1,18 @@
+{{ partial:header }}
+
+{{ if content_blocks }}
+    {{ content_blocks }}
+        {{ if type == "text_block" }}
+            {{ text | markdown }}
+        {{ /if }}
+
+        {{ if type == "html_block" }}
+            {{{ html }}}
+        {{ /if }}
+
+        {{ /content_blocks }}
+{{ else }}
+    {{ template_content }}
+{{ /if }}
+
+{{ partial:footer }}

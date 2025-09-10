@@ -1,0 +1,61 @@
+title: Page
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+          -
+            handle: template
+            field:
+              type: template
+              display: Template
+              localizable: true
+          -
+            handle: content_blocks
+            field:
+              type: bard
+              display: Content Blocks
+              sets:
+                text_block:
+                  display: Text Block
+                  fields:
+                    -
+                      handle: text
+                      field:
+                        type: markdown
+                        display: Text
+                html_block:
+                  display: HTML Block
+                  fields:
+                    -
+                      handle: html
+                      field:
+                        type: code
+                        mode: html
+                        display: HTML Code
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true

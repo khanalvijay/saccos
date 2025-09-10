@@ -1,0 +1,11 @@
+name: Vijaya
+super: true
+id: c92c5cd1-119e-4e14-b417-6374346d994d
+password_hash: $2y$12$SJEjhVOOtGCZooHIWySqZu9UbsnuzNLxLI58ex5rNNf.d..3a1/he
+preferences:
+  nav:
+    content:
+      reorder:
+        - 'content::collections::pages'
+      items:
+        'content::collections::pages': '@move'
