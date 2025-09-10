@@ -5,7 +5,7 @@ title: Contact
 author: c92c5cd1-119e-4e14-b417-6374346d994d
 template: default
 updated_by: c92c5cd1-119e-4e14-b417-6374346d994d
-updated_at: 1757002139
+updated_at: 1757532485
 code:
   code: |-
     <section class="text-white py-2" style="
@@ -295,7 +295,7 @@ content_blocks:
                                                     <i class="fas fa-phone-alt text-success me-3"></i>
                                                     <div>
                                                         <strong>Phone:</strong><br>
-                                                        <a href="tel:084-XXXXXX" class="text-decoration-none">084-XXXXXX</a>
+                                                        <a href="tel:9858026766" class="text-decoration-none">084-XXXXXX</a>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2">
