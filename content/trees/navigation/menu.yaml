@@ -2,12 +2,16 @@ tree:
   -
     id: 1b269fc1-4280-4d13-8995-ac5ee9246e79
     entry: home
+    title: गृहपृष्ठ
   -
     id: 13b651d0-286a-45f7-8824-04411209526c
     entry: 1e4549ba-459d-4704-b3a5-c3668ebbeaae
+    title: डाउनलोड
   -
     id: ca4a99d9-d784-44b3-980e-976699a578c3
     entry: 1449b198-1688-400a-855c-1ac5c7b5ec38
+    title: प्रश्नोत्तर
   -
     id: 1e981afd-e44b-45ae-a95e-ac7d9b4bfb1d
     entry: 58ed3787-6b3a-47de-b929-bfd7e8d20367
+    title: सम्पर्क
