@@ -17,7 +17,7 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          cd /var/www/html/your-repo-name
+          cd /home/pragati/htdocs/pragati.coop.np
           git pull origin main
           composer install --optimize-autoloader --no-dev
           php artisan config:clear
