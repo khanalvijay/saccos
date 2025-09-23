@@ -23,7 +23,8 @@ jobs:
           # Fix Git security issue
           git config --global --add safe.directory /home/pragati/htdocs/pragati.coop.np
 
-          # Pull latest changes
+          # Pull latest changes (force overwrite any local changes)
+          git reset --hard HEAD
           git pull origin main
 
           # Install/update composer dependencies
