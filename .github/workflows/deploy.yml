@@ -1,15 +1,15 @@
-name: Deploy Laravel App
+name: Smart Deploy (Skip Unnecessary Steps)
 
 on:
   push:
-    branches: [ main ]  # Change to your main branch name
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to Server
+    - name: Smart Deploy
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ secrets.SERVER_HOST }}
@@ -18,12 +18,51 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         script: |
           cd /home/pragati/htdocs/pragati.coop.np
+
+          # Get list of changed files
+          git fetch origin main
+          CHANGED_FILES=$(git diff --name-only HEAD origin/main)
+          echo "Changed files: $CHANGED_FILES"
+
+          # Pull changes
           git pull origin main
-          composer install --optimize-autoloader --no-dev
-          php artisan config:clear
+
+          # Conditional operations based on what changed
+
+          # Only run composer if dependencies changed
+          if echo "$CHANGED_FILES" | grep -q -E "(composer\.(json|lock)|vendor/)"; then
+            echo "📦 Dependencies changed - running composer..."
+            export COMPOSER_ALLOW_SUPERUSER=1
+            composer install --optimize-autoloader --no-dev --no-plugins
+          fi
+
+          # Only clear config cache if config files changed
+          if echo "$CHANGED_FILES" | grep -q -E "(config/|\.env\.example)"; then
+            echo "⚙️ Config changed - clearing config cache..."
+            php artisan config:clear
+            php artisan config:cache
+          fi
+
+          # Only clear route cache if routes changed
+          if echo "$CHANGED_FILES" | grep -q -E "(routes/|app/Http/)"; then
+            echo "🛣️ Routes changed - clearing route cache..."
+            php artisan route:clear
+            php artisan route:cache
+          fi
+
+          # Only clear view cache if views changed
+          if echo "$CHANGED_FILES" | grep -q -E "(resources/views/|\.blade\.php)"; then
+            echo "👀 Views changed - clearing view cache..."
+            php artisan view:clear
+            php artisan view:cache
+          fi
+
+          # Always clear general cache (safe)
           php artisan cache:clear
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+
+          # Always fix permissions (required)
+          sudo mkdir -p storage/framework/{views,cache,sessions} storage/logs bootstrap/cache
           sudo chown -R www-data:www-data storage bootstrap/cache
           sudo chmod -R 775 storage bootstrap/cache
+
+          echo "✅ Smart deployment completed!"
